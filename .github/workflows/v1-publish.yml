@@ -50,10 +50,6 @@ jobs:
       - name: Get Short SHA
         run: echo "git-sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
-      #- name: Create Docker Tag from Branch
-      #  if: ${{ github.ref_type == 'branch' }}
-      #  run: echo "docker-tag=sha-${{ env.git-sha }}" >> $GITHUB_ENV
-
       - name: Create Docker If Else
         run: |
           if [ "${{ github.ref_type }}" == "tag" ]; then
@@ -63,14 +59,8 @@ jobs:
           fi
         
       - name: Output Tag
-        run: echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '${{ env.docker-tag }}'" >> $GITHUB_STEP_SUMMARY
-         # echo "Docker Tag set to '${{ env.docker-tag }}'"
-         # echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
-         # echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
-        #  echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
-         # echo "| ref name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
-         # echo "| docker tag | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
-        
+        run: echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '**${{ env.docker-tag }}'**" >> $GITHUB_STEP_SUMMARY
+
 
   check-if-already-exists:
     name: Check if Image already exists
