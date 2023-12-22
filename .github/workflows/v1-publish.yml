@@ -57,7 +57,7 @@ jobs:
       - name: Create Docker If Else
         run: |
           if: [ ${{ github.ref_type == 'tag' }} ] then
-            echo "docker-tag=${{ git.ref_name }}" >> $GITHUB_ENV
+            echo "docker-tag=${{ github.ref_name }}" >> $GITHUB_ENV
           else
             echo "docker-tag=sha-${{ env.git-sha }}" >> $GITHUB_ENV
           fi
