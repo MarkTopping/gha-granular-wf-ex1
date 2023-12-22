@@ -59,7 +59,9 @@ jobs:
           fi
         
       - name: Output Tag
-        run: echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '**${{ env.docker-tag }}'**" >> $GITHUB_STEP_SUMMARY
+        run: |
+          echo "docker-tag=${{ env.docker-tag }}" >> $GITHUB_OUTPUT
+          echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '**${{ env.docker-tag }}'**" >> $GITHUB_STEP_SUMMARY
 
 
   check-if-already-exists:
@@ -68,7 +70,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Tag Exists
-        run: echo "TAG - ${{ env.docker-tag }}"
+        env:
+          docker-tag: ${{ needs.derive-tag.outputs.docker-tag }}
+        run: echo "Docker tag equals '$docker-tag'"
       - name: Login to ACR
         run: echo "logging into ACR"
       - name: Determine Image Tag
