@@ -51,8 +51,8 @@ jobs:
           echo "| triggered by | ${{ github.triggering_actor }} |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | $INPUTS |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | {{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | ${{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | ${{ INPUTS }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | ${{ toJSON(inputs) }} |" >> $GITHUB_STEP_SUMMARY
           
         
 
