@@ -16,15 +16,6 @@ on:
         type: boolean
         required: true
         default: false
-        
-        
-  # Auto trigger when pushes to selected branch naming conventions occur
-  #push: 
-    #branches: [main, feat/**, feature/**, release/**]
-    #paths-ignore: ['*.md']
-  # Auto trigger when a release is created
-  #release:
-    #types: [published]
 
 jobs:
 
@@ -49,6 +40,20 @@ jobs:
           echo *** Other Useful Stuff ***
           echo ABC
           echo XYZ
+
+  derive-tag:
+    name: Derive Image Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Short SHA
+        run: echo "git-sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        
+      - name: Create Tag  
+        if: ${{ github.ref_type == 'branch' }}
+        run: |
+          echo "docker-tag='{{ github.run_number }}-$env.git-sha' >> $GITHUB_ENV
+          echo Tag = $GITHUB_ENV.docker-tag    
+  
 
   check-if-already-exists:
     name: Check if Image already exists
