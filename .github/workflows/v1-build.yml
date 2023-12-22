@@ -37,7 +37,7 @@ jobs:
         run: |
           echo *** Workflow Context ***
           echo Repo: ${{ github.repository }}
-          echo Ref: ${{ github.ref_type }} / {{ github.ref_name }}
+          echo Ref: ${{ github.ref_type }} / ${{ github.ref_name }}
           echo Run ID: ${{ github.run_id }}
           echo Run Attempt: ${{ github.run_attempt }}
           echo Git SHA: ${{ github.sha }}
