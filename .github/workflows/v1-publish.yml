@@ -55,6 +55,8 @@ jobs:
         run: |
           echo "test | env.git-sha | ${{ env.git-sha }} | $env.git-sha"
           echo "docker-tag=${{ env.git-sha }}" >> $GITHUB_ENV
+          echo "Tag = ${{ env.docker-tag }}"
+          echo "| git-sha | ${{ env.git-sha }} |"
           echo Tag = ${{ env.docker-tag }}
           echo Tag = env.docker-tag
   
