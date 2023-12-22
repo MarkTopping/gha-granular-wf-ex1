@@ -23,8 +23,8 @@ on:
 jobs:
 
   info:
-    name: Capture Workflow Info
-    runs-on: ubuntu-latest
+    name: Workflow context
+     runs-on: ubuntu-latest
     #outputs:
     #  run-id: ${{ github.run_id }}
     #  run-attempt: ${{ github.run_attempt	}}
@@ -36,23 +36,19 @@ jobs:
       
       - name: Get Short SHA
         run: echo "git-sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-      - name: Log Workflow Information / Inputs
+      - name: Capture Inputs
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: echo ""
-      - name: Outputs
+      - name: Create output summary
         run: |
           echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
           echo "| git-sha | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| repository | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
           echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| reg name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ref name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| triggered by | ${{ github.triggering_actor }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | '${{ inputs }}' |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | ${{ INPUTS }} |" >> $GITHUB_STEP_SUMMARY
-          
-        
 
   build-and-test:
     runs-on: ubuntu-latest
