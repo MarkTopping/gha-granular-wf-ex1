@@ -60,6 +60,7 @@ jobs:
             echo "docker-tag=${{ git.ref_name }}" >> $GITHUB_ENV
           else
             echo "docker-tag=sha-${{ env.git-sha }}" >> $GITHUB_ENV
+          fi
         
       - name: Print Tag
         run: echo "Docker Tag set to '${{ env.docker-tag }}'"
