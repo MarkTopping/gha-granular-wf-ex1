@@ -32,13 +32,14 @@ jobs:
     #  inputs: ${{ toJSON(inputs) }}
     steps:
       - name: Get Short SHA
-        run: echo "git-sha=$git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "git-sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Log Workflow Information / Inputs
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: echo ""
       - name: Outputs
         run: |
+          echo "| Variable | Value |" >> >> $GITHUB_STEP_SUMMARY
           echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
           echo "| git-sha | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| repository | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
