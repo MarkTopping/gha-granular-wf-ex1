@@ -50,7 +50,8 @@ jobs:
           echo ABC
           echo XYZ
 
-  check-if-exits:
+  check-if-already-exists:
+    name: Check if Image already exists
     runs-on: ubuntu-latest
     steps:
       - name: Login to ACR
@@ -72,7 +73,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [check-if-exits]
+    needs: [check-if-already-exists]
 
     steps:
       - name: Build
