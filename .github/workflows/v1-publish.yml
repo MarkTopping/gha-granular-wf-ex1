@@ -29,9 +29,9 @@ jobs:
           echo *** Workflow Context ***
           echo Repo: ${{ github.repository }}
           echo Ref: ${{ github.ref_type }} / {{ github.ref_name }}
-          echo Run ID: ${{ github.run_id }}
-          echo Run Attempt: ${{ github.run_attempt	 }}
-          echo Git SHA: ${{ github.sha }}
+          echo Run Number: ${{ github.run_number }}
+          echo Run Attempt: ${{ github.run_attempt }}
+          echo Git Long SHA: ${{ github.sha }}
           echo Triggered by: ${{ github.triggering_actor }}
           echo ""
           echo "*** Inputs ***"
@@ -67,6 +67,8 @@ jobs:
     needs: [derive-tag]
     runs-on: ubuntu-latest
     steps:
+      - name: Check Tag Exists
+        run: echo "TAG - ${{ env.docker-tag }}"
       - name: Login to ACR
         run: echo "logging into ACR"
       - name: Determine Image Tag
