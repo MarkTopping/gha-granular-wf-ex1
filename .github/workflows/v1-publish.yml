@@ -62,11 +62,19 @@ jobs:
             echo "docker-tag=sha-${{ env.git-sha }}" >> $GITHUB_ENV
           fi
         
-      - name: Print Tag
-        run: echo "Docker Tag set to '${{ env.docker-tag }}'"
+      - name: Output Tag
+        run: echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '${{ env.docker-tag }}'" >> $GITHUB_STEP_SUMMARY
+         # echo "Docker Tag set to '${{ env.docker-tag }}'"
+         # echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
+         # echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
+        #  echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
+         # echo "| ref name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+         # echo "| docker tag | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
+        
 
   check-if-already-exists:
     name: Check if Image already exists
+    needs: [derive-tag]
     runs-on: ubuntu-latest
     steps:
       - name: Login to ACR
