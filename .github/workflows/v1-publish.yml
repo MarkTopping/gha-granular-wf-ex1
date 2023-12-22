@@ -55,11 +55,12 @@ jobs:
         run: |
           echo "test | env.git-sha | ${{ env.git-sha }} | $env.git-sha"
           echo "docker-tag=${{ env.git-sha }}" >> $GITHUB_ENV
-          echo "Tag = ${{ env.docker-tag }}"
+          echo "| tag | ${{ env.docker-tag }} |"
           echo "| git-sha | ${{ env.git-sha }} |"
-          echo Tag = ${{ env.docker-tag }}
-          echo Tag = env.docker-tag
-  
+      - name: Print Tag
+        run: |
+          echo "| tag | ${{ env.docker-tag }} |"
+          echo "| git-sha | ${{ env.git-sha }} |"
 
   check-if-already-exists:
     name: Check if Image already exists
