@@ -31,6 +31,8 @@ jobs:
     #  tiggered-by: ${{ github.triggering_actor }}
     #  inputs: ${{ toJSON(inputs) }}
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Get Short SHA
         run: echo "git-sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Log Workflow Information / Inputs
@@ -46,7 +48,7 @@ jobs:
           echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
           echo "| reg name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| triggered by | ${{ github.triggering_actor }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | $INPUTS |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | {{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
         
 
   build-and-test:
