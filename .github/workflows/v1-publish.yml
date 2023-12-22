@@ -60,7 +60,7 @@ jobs:
       - name: Simulate Image Exists Check
         if: $${{ inputs.SimulateImageAlreadyExists == true }}
         run: |
-          echo: "Simulating image already exists. Step will force-fail"
+          echo "Simulating image already exists. Step will force-fail"
           run exit 1
       - name: Check if image is already published
         run: |
