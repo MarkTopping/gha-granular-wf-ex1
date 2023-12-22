@@ -49,9 +49,8 @@ jobs:
           echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
           echo "| reg name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| triggered by | ${{ github.triggering_actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | '${{ inputs }}' |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | ${{ INPUTS }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | '${{ toJSON(inputs) }}' |" >> $GITHUB_STEP_SUMMARY
-          echo "| inputs | ${{ toJSON(inputs) }} |" >> $GITHUB_STEP_SUMMARY
           
         
 
