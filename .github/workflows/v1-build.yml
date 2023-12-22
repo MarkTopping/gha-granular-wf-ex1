@@ -24,36 +24,27 @@ jobs:
 
   wf-info:
     runs-on: ubuntu-latest
-    outputs:
-      run-id: ${{ github.run_id }}
-      run-attempt: ${{ github.run_attempt	}}
-      SHA: ${{ github.sha }}
-      tiggered-by: ${{ github.triggering_actor }}
-      inputs: ${{ toJSON(inputs) }}
+    #outputs:
+    #  run-id: ${{ github.run_id }}
+    #  run-attempt: ${{ github.run_attempt	}}
+    #  SHA: ${{ github.sha }}
+    #  tiggered-by: ${{ github.triggering_actor }}
+    #  inputs: ${{ toJSON(inputs) }}
     steps:
       - name: Get Short SHA
         run: echo "git-sha=$git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Log Workflow Information / Inputs
         env:
           INPUTS: ${{ toJSON(inputs) }}
-        run: |
-          echo *** Workflow Context ***
-          echo Repo: ${{ github.repository }}
-          echo Ref: ${{ github.ref_type }} / ${{ github.ref_name }}
-          echo Run ID: ${{ github.run_id }}
-          echo Run Attempt: ${{ github.run_attempt }}
-          echo Git SHA: ${{ github.sha }}
-          echo Triggered by: ${{ github.triggering_actor }}
-          echo ""
-          echo "*** Inputs ***"
-          echo $INPUTS
-          echo
-          echo *** Other Useful Stuff ***
-          echo ABC
-          echo XYZ
       - name: Outputs
         run: |
-          echo "| git-sha | ${{ env.git-sha }} | " >> $GITHUB_STEP_SUMMARY
+          echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
+          echo "| git-sha | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| repository | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ref type | ${{ github.ref_type }} |" >> >> $GITHUB_STEP_SUMMARY
+          echo "| reg name | ${{ github.ref_name }} |" >> >> $GITHUB_STEP_SUMMARY
+          echo "| triggered by | ${{ github.triggering_actor }} |" >> >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | $INPUTS |" >> >> $GITHUB_STEP_SUMMARY
         
 
   build-and-test:
