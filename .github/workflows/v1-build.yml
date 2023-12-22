@@ -24,6 +24,12 @@ jobs:
 
   wf-info:
     runs-on: ubuntu-latest
+    outputs:
+      run-id: ${{ github.run_id }}
+      run-attempt: ${{ github.run_attempt	}}
+      SHA: ${{ github.sha }}
+      tiggered-by: ${{ github.triggering_actor }}
+      inputs: ${{ toJSON(inputs) }}
     steps:
       - name: Log Workflow Information / Inputs
         env:
@@ -33,7 +39,7 @@ jobs:
           echo Repo: ${{ github.repository }}
           echo Ref: ${{ github.ref_type }} / {{ github.ref_name }}
           echo Run ID: ${{ github.run_id }}
-          echo Run Attempt: ${{ github.run_attempt	 }}
+          echo Run Attempt: ${{ github.run_attempt }}
           echo Git SHA: ${{ github.sha }}
           echo Triggered by: ${{ github.triggering_actor }}
           echo ""
