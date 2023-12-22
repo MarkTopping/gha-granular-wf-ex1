@@ -53,7 +53,7 @@ jobs:
           echo "| inputs | {{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | ${{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | ${{ INPUTS }} |" >> $GITHUB_STEP_SUMMARY
-          echo "{{ | inputs | $INPUTS |" }} >> $GITHUB_STEP_SUMMARY
+          
         
 
   build-and-test:
