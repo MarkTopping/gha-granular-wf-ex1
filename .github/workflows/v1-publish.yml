@@ -44,6 +44,8 @@ jobs:
   derive-tag:
     name: Derive Image Tag
     runs-on: ubuntu-latest
+    outputs:
+      docker-tag: ${{ steps.output-tag.outputs.docker-tag }}
     steps:
       - uses: actions/checkout@v4
       
@@ -59,8 +61,9 @@ jobs:
           fi
         
       - name: Output Tag
+        id: output-tag
         run: |
-          echo "docker-tag=${{ env.docker-tag }}" >> $GITHUB_OUTPUT
+          echo "docker-tag=${{ env.docker-tag }}" >> "$GITHUB_OUTPUT"
           echo "Publish was exectuted on a git ${{ github.ref_type }}, so the Docker Tag has been set to '**${{ env.docker-tag }}'**" >> $GITHUB_STEP_SUMMARY
 
 
@@ -69,10 +72,9 @@ jobs:
     needs: [derive-tag]
     runs-on: ubuntu-latest
     steps:
-      - name: Check Tag Exists
-        env:
+      - env:
           docker-tag: ${{ needs.derive-tag.outputs.docker-tag }}
-        run: echo "Docker tag equals '$docker-tag'"
+        run: echo "Docker tag captured from previous job as '$docker-tag'"
       - name: Login to ACR
         run: echo "logging into ACR"
       - name: Determine Image Tag
