@@ -78,6 +78,8 @@ jobs:
       - name: Login to ACR
         run: echo "logging into ACR"
       - name: Determine Image Tag
+        env:
+          docker-tag: ${{ needs.derive-tag.outputs.docker-tag }}
         run: |
           echo "determining the image tag based off whatever versioning logic used"
           echo "tag equals: ${{ env.docker-tag }}"
@@ -87,9 +89,11 @@ jobs:
           echo "Simulating image already exists. Step will force-fail"
           run exit 1
       - name: Check if image is already published
+        env:
+          docker-tag: ${{ needs.derive-tag.outputs.docker-tag }}
         run: |
           echo "Checking if image already exists in the container registry"
-          echo "Image exists equals ${{ inputs.SimulateImageAlreadyExists }}"
+          echo "Image exists equals: ${{ inputs.SimulateImageAlreadyExists }}"
           echo "Tag equals: ${{ env.docker-tag }}"
       # Issue. This won't run if the step fails. Does this matter? 
       - name: Logout of ACR
