@@ -88,8 +88,9 @@ jobs:
           run exit 1
       - name: Check if image is already published
         run: |
-          echo Checking if image already exists in the container registry
-          echo Image exits = ${{ 'inputs.SimulateImageAlreadyExists' }}
+          echo "Checking if image already exists in the container registry"
+          echo "Image exists equals ${{ inputs.SimulateImageAlreadyExists }}"
+          echo "Tag equals: ${{ env.docker-tag }}"
       # Issue. This won't run if the step fails. Does this matter? 
       - name: Logout of ACR
         run: echo "logging out of ACR"
