@@ -1,0 +1,60 @@
+name: V1 - Publish Image
+
+run-name:  "#${{ github.run_number }}. Publish Image on ${{ github.ref_type }} '${{ github.ref_name }}'. Triggered by: ${{ github.triggering_actor }}"
+
+on:
+  # Allow for manual execution and to trigger Secondary region deployments
+  workflow_dispatch:
+    inputs:
+      BypassImageScan:
+        description: Bypass Image Scan?
+        type: boolean
+        required: true
+        default: false
+        
+  # Auto trigger when pushes to selected branch naming conventions occur
+  #push: 
+    #branches: [main, feat/**, feature/**, release/**]
+    #paths-ignore: ['*.md']
+  # Auto trigger when a release is created
+  #release:
+    #types: [published]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: echo "running docker build --target=final"
+
+  scan:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.BypassImageScan != true }}
+    needs: [build]
+    
+    steps:
+      - name: download Trivy
+        run: echo "downloading Trivy"
+    
+      - name: Aqua Image Scan
+        run: echo "scanning image"
+
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ always() && (needs.scan.result == 'success' || inputs.BypassImageScan == true ) }}
+    needs: [build, scan]
+
+    steps:
+      - name: Login to ACR
+        run: echo "logging into ACR"
+
+      - name: Tag Image
+        run: echo "running docker tag..."
+
+      - name: Push Image
+        run: echo "publishing image with tag ???"
+
+      - name: Logout of ACR
+        run: echo "logging out of ACR"
