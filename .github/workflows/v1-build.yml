@@ -39,7 +39,7 @@ jobs:
         run: echo ""
       - name: Outputs
         run: |
-          echo "| Variable | Value |" >> >> $GITHUB_STEP_SUMMARY
+          echo "| Variable | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|:--|:--|" >> $GITHUB_STEP_SUMMARY
           echo "| git-sha | ${{ env.git-sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| repository | ${{ github.repository }} |" >> $GITHUB_STEP_SUMMARY
