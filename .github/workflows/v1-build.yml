@@ -24,7 +24,7 @@ jobs:
 
   info:
     name: Workflow context
-     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     #outputs:
     #  run-id: ${{ github.run_id }}
     #  run-attempt: ${{ github.run_attempt	}}
