@@ -74,11 +74,13 @@ jobs:
     steps:
       - env:
           docker-tag: ${{ needs.derive-tag.outputs.docker-tag }}
-        run: echo "Docker tag captured from previous job as '$docker-tag'"
+        run: echo "Docker tag captured from previous job as ${{ env.docker-tag }}"
       - name: Login to ACR
         run: echo "logging into ACR"
       - name: Determine Image Tag
-        run: echo "determining the image tag based off whatever versioning logic used"
+        run: |
+          echo "determining the image tag based off whatever versioning logic used"
+          echo "tag equals: ${{ env.docker-tag }}"
       - name: Simulate Image Exists Check
         if: ${{ inputs.SimulateImageAlreadyExists == true }}
         run: |
