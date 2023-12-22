@@ -31,6 +31,8 @@ jobs:
       tiggered-by: ${{ github.triggering_actor }}
       inputs: ${{ toJSON(inputs) }}
     steps:
+      - name: Get Short SHA
+        run: echo "git-sha=$git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Log Workflow Information / Inputs
         env:
           INPUTS: ${{ toJSON(inputs) }}
@@ -49,6 +51,9 @@ jobs:
           echo *** Other Useful Stuff ***
           echo ABC
           echo XYZ
+      - name: Outputs
+        run: |
+          echo "| git-sha | ${{ env.git-sha }} | " >> $GITHUB_STEP_SUMMARY
         
 
   build-and-test:
