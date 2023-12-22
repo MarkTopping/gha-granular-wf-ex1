@@ -29,7 +29,10 @@ jobs:
         env:
           INPUTS: ${{ toJSON(inputs) }}
         run: |
-          echo "Executed by:" github.triggering_actor
+          echo "Executed by:" $github.triggering_actor
+          echo "Executed by:" ${{ github.triggering_actor }}
+          echo Executed by: ${{ github.triggering_actor }}
+          echo ""
           echo "Workflow executed with the following inputs"
           echo $INPUTS
         
