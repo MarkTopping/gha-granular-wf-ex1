@@ -58,7 +58,7 @@ jobs:
       - name: Determine Image Tag
         run: echo "determining the image tag based off whatever versioning logic used"
       - name: Simulate Image Exists Check
-        if: $${{ inputs.SimulateImageAlreadyExists == true }}
+        if: ${{ inputs.SimulateImageAlreadyExists == true }}
         run: |
           echo "Simulating image already exists. Step will force-fail"
           run exit 1
@@ -66,6 +66,9 @@ jobs:
         run: |
           echo Checking if image already exists in the container registry
           echo Image exits = ${{ 'inputs.SimulateImageAlreadyExists' }}
+      # Issue. This won't run if the step fails. Does this matter? 
+      - name: Logout of ACR
+        run: echo "logging out of ACR"
 
   build:
     runs-on: ubuntu-latest
