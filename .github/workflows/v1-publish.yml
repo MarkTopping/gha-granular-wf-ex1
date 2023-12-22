@@ -11,6 +11,12 @@ on:
         type: boolean
         required: true
         default: false
+      SimulateImageAlreadyExists:
+        description: Simulate Image Already Exists?
+        type: boolean
+        required: true
+        default: false
+        
         
   # Auto trigger when pushes to selected branch naming conventions occur
   #push: 
@@ -43,6 +49,23 @@ jobs:
           echo *** Other Useful Stuff ***
           echo ABC
           echo XYZ
+
+  check-if-exits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to ACR
+        run: echo "logging into ACR"
+      - name: Determine Image Tag
+        run: echo "determining the image tag based off whatever versioning logic used"
+      - name: Simulate Image Exists Check
+        if: $${{ inputs.SimulateImageAlreadyExists == true }}
+        run: |
+          echo: "Simulating image already exists. Step will force-fail"
+          run exit 1
+      - name: Check if image is already published
+        run: |
+          echo Checking if image already exists in the container registry
+          echo Image exits = ${{ 'inputs.SimulateImageAlreadyExists' }}
 
   build:
     runs-on: ubuntu-latest
