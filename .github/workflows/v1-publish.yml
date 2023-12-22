@@ -22,6 +22,28 @@ on:
 
 jobs:
 
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Workflow Information / Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: |
+          echo *** Workflow Context ***
+          echo Repo: ${{ github.repository }}
+          echo Ref: ${{ github.ref_type }} / {{ github.ref_name }}
+          echo Run ID: ${{ github.run_id }}
+          echo Run Attempt: ${{ github.run_attempt	 }}
+          echo Git SHA: ${{ github.sha }}
+          echo Triggered by: ${{ github.triggering_actor }}
+          echo ""
+          echo "*** Inputs ***"
+          echo $INPUTS
+          echo
+          echo *** Other Useful Stuff ***
+          echo ABC
+          echo XYZ
+
   build:
     runs-on: ubuntu-latest
 
