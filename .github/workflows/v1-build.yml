@@ -22,7 +22,8 @@ on:
 
 jobs:
 
-  wf-info:
+  info:
+    name: Capture Workflow Info
     runs-on: ubuntu-latest
     #outputs:
     #  run-id: ${{ github.run_id }}
@@ -48,7 +49,11 @@ jobs:
           echo "| ref type | ${{ github.ref_type }} |" >> $GITHUB_STEP_SUMMARY
           echo "| reg name | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
           echo "| triggered by | ${{ github.triggering_actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | $INPUTS |" >> $GITHUB_STEP_SUMMARY
           echo "| inputs | {{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | ${{ $INPUTS }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| inputs | ${{ INPUTS }} |" >> $GITHUB_STEP_SUMMARY
+          echo "{{ | inputs | $INPUTS |" }} >> $GITHUB_STEP_SUMMARY
         
 
   build-and-test:
