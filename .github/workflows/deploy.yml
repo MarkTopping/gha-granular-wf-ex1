@@ -1,4 +1,4 @@
-name: V1 - Deploy
+name: Deploy
 
 run-name: "#${{ github.run_number }}. Deploy ${{ github.ref_type }} '${{ github.ref_name }}'. Triggered by: ${{ github.triggering_actor }}"
 
