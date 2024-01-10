@@ -17,6 +17,17 @@ on:
         required: true
         default: false
 
+  workflow_run:
+    workflows: [Build Test Scan]
+    types:
+      - completed
+    branches:
+      - release/**
+      - releases/**
+
+    # Limitation: We cannot trigger this workflow automatically based upon the use of Tags 
+      
+
 jobs:
 
   info:
