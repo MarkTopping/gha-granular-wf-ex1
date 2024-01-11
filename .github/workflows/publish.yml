@@ -24,7 +24,8 @@ on:
     branches:
       - release/**
       - releases/**
-      - v*
+      - refs/tags/v*
+      - tags/v*
 
     # Limitation: We cannot trigger this workflow automatically based upon the use of Tags 
       
