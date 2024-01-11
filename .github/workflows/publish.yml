@@ -25,7 +25,6 @@ on:
       - release/**
       - releases/**
       - refs/tags/v*
-      - tags/v*
 
     # Limitation: We cannot trigger this workflow automatically based upon the use of Tags 
       
